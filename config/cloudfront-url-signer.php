@@ -7,6 +7,11 @@ return [
     'default_expiration_time_in_days' => 1,
 
     /*
+     * Cache the private key and use an extended AWS Signer.
+     */
+    'cache_private_key' => true,
+
+    /*
      * The private key used to sign all URLs.
      */
     'private_key_path' => storage_path(env('CLOUDFRONT_PRIVATE_KEY_PATH', 'trusted-signer.pem')),

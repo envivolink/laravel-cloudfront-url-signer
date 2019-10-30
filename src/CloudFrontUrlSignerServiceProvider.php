@@ -2,6 +2,7 @@
 
 namespace Dreamonkey\CloudFrontUrlSigner;
 
+use Dreamonkey\CloudFrontUrlSigner\CloudFront\UrlSigner as CachedUrlSigner;
 use Dreamonkey\CloudFrontUrlSigner\Exceptions\InvalidKeyPairId;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,7 +30,7 @@ class CloudFrontUrlSignerServiceProvider extends ServiceProvider
                 throw new InvalidKeyPairId('Key pair id cannot be empty');
             }
 
-            return new CloudFrontUrlSigner(new \Aws\CloudFront\UrlSigner($config['key_pair_id'], $config['private_key_path']));
+            return new CloudFrontUrlSigner(new CachedUrlSigner($config['key_pair_id'], $config['private_key_path']));
         });
 
         $this->app->alias(UrlSigner::class, 'cloudfront-url-signer');
